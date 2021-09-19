@@ -3,6 +3,10 @@ void title() {
   
   gifbg();
   name(width/2, height/2);
+  
+  pakbutton(width/2, 3*height/4);
+  
+  expcircle(width/2, height/2);
 }
 
 //== Name ==
@@ -39,4 +43,48 @@ void gifbg() {
   if (currentF == NoF) {
     currentF = 0;
   }
+}
+
+//== Press Any Key ==
+void pakbutton (float x, float y){
+  pushMatrix();
+  translate(x, y);
+  
+  fill(0);
+  textAlign(CENTER, CENTER);
+  
+  textFont(fontlist[6]);
+  
+  textSize(20);
+  
+  if (keyPressed) {
+    textSize(15);
+  }
+  
+  text("PRESS ANY KEY", 0, -25);
+  text("TO CONTINUE", 0, 10);
+  
+  popMatrix();
+}
+
+//== Circle Transition ==
+void expcircle(float x, float y) {
+  pushMatrix();
+  translate(x, y);
+  
+  fill(0);
+  noStroke();
+  
+  ellipse(0, 0, circlesize, circlesize);
+  
+  if (circletransit == true) {
+    circlesize = 1.2*circlesize + 2;
+  }
+    
+  if (circlesize > 2000) {
+    mode = home;
+    circletransit = false;
+  }
+  
+  popMatrix();
 }
