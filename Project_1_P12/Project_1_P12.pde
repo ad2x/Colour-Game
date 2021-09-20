@@ -13,7 +13,7 @@ color[] cursorc = {c0, c1, c2, c3, c4, c5, c6};
 int cursorcc = 0;
 
 //== Modes ==
-int mode = 0;
+int mode = 2;
 final int title = 0;
 final int home = 1;
 final int game = 2;
@@ -21,10 +21,9 @@ final int options = 3;
 
 //== Game Modes ==
 int game_mode = 0;
-final int start = 1;
-final int playing = 2;
-final int paused = 3; 
-final int over = 4;
+final int start = 0;
+final int playing = 1;
+final int over = 2;
 
 //== Custom Fonts ==
 PFont[] fontlist;
@@ -40,6 +39,14 @@ float cfont = 0;
 //Circle Transition
 boolean circletransit = false;
 float circlesize = 0;
+
+//== Game ==
+//--Start screen--
+//"Play"
+int playh = 160;
+float playr = 0;
+//Makes the hue go up or down
+boolean playhdir = true;
 
 void setup() {
   size(800, 800);
