@@ -4,7 +4,7 @@ void pcursor() {
   translate(mouseX, mouseY);
   
   noFill();
-  strokeWeight(10);
+  strokeWeight(5);
   
   stroke(cursorc[cursorcc]);
   
@@ -18,5 +18,14 @@ void mousePressed () {
   cursorcc++;
   if (cursorcc == 7) {
     cursorcc = 0;
+  }
+}
+
+void mouseReleased() {
+  //== Play Button ==
+  if (mouseX >= 25 && mouseX < 775 && mouseY >= 25 && mouseY <= 387.5 && mode == home) {
+    pmode.append(mode);
+    
+    mode = game;
   }
 }
