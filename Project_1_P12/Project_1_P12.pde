@@ -19,6 +19,9 @@ final int home = 1;
 final int game = 2;
 final int options = 3;
 
+//For escing out of modes - same code for this as my breakout project
+IntList pmode;
+
 //== Game Modes ==
 int game_mode = 0;
 final int start = 0;
@@ -70,10 +73,12 @@ void setup() {
     }
   }
   
-  //== C
+  //==== PMode ====
+  pmode = new IntList();
 }
 
 void draw() {
+  println(pmode);
   //== Mode Framework ==
   switch(mode) {
     case title:

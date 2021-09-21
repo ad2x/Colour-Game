@@ -22,6 +22,23 @@ void playbutton(float x, float y) {
   
   rect(0, 0, 750, 362.5);
   
+  fill(0);
+  
+  for (int i = 0; i < 6; i++) {
+    if (floor(cfont) == i) {
+      textFont(fontlist[i]);
+    }
+  }
+  
+  cfont = cfont + 0.033334;
+  if (floor(cfont) == 5) {
+    cfont = 0;
+  }
+  
+  textSize(100);
+  textAlign(CENTER, CENTER);
+  text("Play", 375, 180);
+  
   popMatrix();
 }
 
