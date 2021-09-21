@@ -28,4 +28,9 @@ void mouseReleased() {
     
     mode = game;
   }
+  
+  //== Start Button ==
+  if (dist(mouseX, mouseY, width/2, 3*height/4) <= 50) {
+    circletog = true;
+  }
 }

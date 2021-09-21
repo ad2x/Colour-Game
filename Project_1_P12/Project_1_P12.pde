@@ -13,7 +13,7 @@ color[] cursorc = {c0, c1, c2, c3, c4, c5, c6};
 int cursorcc = 0;
 
 //== Modes ==
-int mode = 2;
+int mode = 0;
 final int title = 0;
 final int home = 1;
 final int game = 2;
@@ -50,6 +50,10 @@ int playh = 160;
 float playr = 0;
 //Makes the hue go up or down
 boolean playhdir = true;
+//Circle dist
+float circledist = 50;
+//Circle toggle
+boolean circletog;
 
 void setup() {
   size(800, 800);
@@ -78,7 +82,6 @@ void setup() {
 }
 
 void draw() {
-  println(pmode);
   //== Mode Framework ==
   switch(mode) {
     case title:
