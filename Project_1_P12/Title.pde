@@ -55,10 +55,10 @@ void pakbutton (float x, float y){
   
   textFont(fontlist[6]);
   
-  textSize(20);
+  textSize(45);
   
-  if (keyPressed) {
-    textSize(15);
+  if (keyPressed && circletransit == false) {
+    textSize(35);
   }
   
   text("PRESS ANY KEY", 0, -25);
@@ -82,7 +82,13 @@ void expcircle(float x, float y) {
   }
     
   if (circlesize > 2000) {
-    mode = home;
+    mode = game;
+    game_mode = start;
+    
+    bcw = false;
+    cdt = false;
+    circletog = false;
+    circledist = 50;
     circletransit = false;
   }
   

@@ -1,11 +1,20 @@
+import processing.javafx.*;
+
 //== Colour Palette ==
 color c0 = #E74C3C;
 color c1 = #F1C40F;
 color c2 = #F4D03F;
 color c3 = #2ECC71;
 color c4 = #3498DB;
-color c5 = #7D3C98;
+color c5 = #4B0082;
 color c6 = #884EA0;
+
+int wordcc = 0;
+
+//-- Word array --
+String[] colourwords = {"Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet"};
+
+int colourcw = 0;
 
 //Cursor colours
 color[] cursorc = {c0, c1, c2, c3, c4, c5, c6};
@@ -15,12 +24,8 @@ int cursorcc = 0;
 //== Modes ==
 int mode = 0;
 final int title = 0;
-final int home = 1;
 final int game = 2;
 final int options = 3;
-
-//For escing out of modes - same code for this as my breakout project
-IntList pmode;
 
 //== Game Modes ==
 int game_mode = 0;
@@ -30,6 +35,9 @@ final int over = 2;
 
 //== Custom Fonts ==
 PFont[] fontlist;
+
+//Used in game
+int currentfontg = 0;
 
 //== Gif Background ==
 PImage[] gif;
@@ -54,9 +62,20 @@ boolean playhdir = true;
 float circledist = 50;
 //Circle toggle
 boolean circletog;
+//--Countdown--
+boolean cdt = false;
+int time = 0;
+//Circle behind words
+boolean bcw = false;
+//Points
+int pointsl = 0;
+int pointsr = 0;
+
+//Timer length
+float timerlength = 0;
 
 void setup() {
-  size(800, 800);
+  size(800, 800, FX2D);
   noCursor();
   
   //== Fonts ==
@@ -76,9 +95,6 @@ void setup() {
       gif[i] = loadImage("data/Images/gif/frame_" + i + "_delay-0.04s.gif");
     }
   }
-  
-  //==== PMode ====
-  pmode = new IntList();
 }
 
 void draw() {
@@ -86,9 +102,6 @@ void draw() {
   switch(mode) {
     case title:
       title();
-      break;
-    case home:
-      home();
       break;
     case game:
       game();

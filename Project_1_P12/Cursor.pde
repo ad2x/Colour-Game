@@ -22,13 +22,6 @@ void mousePressed () {
 }
 
 void mouseReleased() {
-  //== Play Button ==
-  if (mouseX >= 25 && mouseX < 775 && mouseY >= 25 && mouseY <= 387.5 && mode == home) {
-    pmode.append(mode);
-    
-    mode = game;
-  }
-  
   //== Start Button ==
   if (dist(mouseX, mouseY, width/2, 3*height/4) <= 50) {
     circletog = true;

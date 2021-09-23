@@ -39,7 +39,7 @@ void game_start_playbutton(float x, float y) {
   noFill();
   stroke(playh-60, 360, 360);
   if (dist(mouseX, mouseY, width/2, 3*height/4) <= 50) {
-    stroke(playh, 180, 360);
+    stroke(playh, 360, 180);
   }
   if (circletog == true) {
     stroke(playh, 0, 360);
@@ -75,9 +75,12 @@ void game_start_playbutton(float x, float y) {
   
     if (circledist <= 0) {
       circledist -= 5;
-      if (circledist >= -10000) {
-        line(0, 0, 0, -circledist);
-        line(0, 0, 0, circledist);
+      line(0, 0, 0, -circledist);
+      line(0, 0, 0, circledist);
+      if (circledist <= -height) {
+        time =  minute()*60 + second();
+        game_mode = playing;
+        cdt = true;
       }
     }
   }
@@ -87,7 +90,165 @@ void game_start_playbutton(float x, float y) {
 
 //== Gameplay ==
 void game_playing() {
+  //Divider line
+  stroke(#FFFCFC);
+  line (width/2, -20, width/2, height + 20);
   
+  timer(width/2, height/2);
+  
+  if (cdt == true) {
+    countdowntimer(width/2, height/2);
+  }
+  
+  //Background Circle
+  if (bcw == true) {
+    fill(0);
+    noStroke();
+    ellipse(width/2, height/2, 300, 300);
+  }
+  
+  //Words
+  if (game_mode == playing && cdt == false)
+  colourword(width/2, height/2);
+  
+  //Points
+  pointsd();
+  pointerl(width/5, height/5);
+  pointerr(4*width/5, height/5);
+}
+
+//Countdown timer
+void countdowntimer(float x, float y) {
+  pushMatrix();
+  translate(x, y);
+  
+  fill(0);
+  ellipse(0, 0, 300, 300);
+  
+  fill(255);
+  textFont(fontlist[6]);
+  textSize(200);
+  textAlign(CENTER, CENTER);
+  
+  int ctime = minute()*60 + second() - time - 3;
+  
+  text(-ctime, 10, -20);
+    
+  if (ctime == 0) {
+    cdt = false;
+    bcw = true;
+    
+    reroll();
+  }
+  
+  popMatrix();
+}
+
+//-- Word functions --
+void reroll() {
+  if (game_mode == playing && cdt == false) {
+    wordcc = (int)random(0, 7);
+    
+    int coinflip = (int)random(0, 2);
+    
+    if (coinflip == 0){
+      colourcw = wordcc;
+    } else {
+      colourcw = (int)random(0, 7);
+      
+      while(colourcw == wordcc) {
+        colourcw = (int)random(0, 7);
+      }
+    }
+  }
+  
+  currentfontg = (int)random(0, 6);
+}
+
+void guess() {
+  if (keyCode == RIGHT) {
+    if (colourcw == wordcc) {
+      pointsr++;
+    } else {
+      pointsr--;
+    }
+  } else if (keyCode == LEFT) {
+    if (colourcw == wordcc) {
+      pointsl--;
+    } else {
+      pointsl++;
+    }
+  }
+  
+  reroll();
+}
+
+void colourword(float x, float y) {
+  pushMatrix();
+  translate(x, y);
+  
+  fill(cursorc[wordcc]);
+  
+  textFont(fontlist[currentfontg]);
+  textAlign(CENTER, CENTER);
+  textSize(150);
+  
+  text(colourwords[colourcw], 0, 0);
+  
+  popMatrix();
+}
+
+//-- Points --
+void pointsd() {  
+  fill(255);
+  textFont(fontlist[6]);
+  textSize(150);
+  
+  text(pointsl, width/3, 3*height/4);
+  text(pointsr, 2*width/3, 3*height/4);
+}
+
+//-- Pointers --
+void pointerl(float x, float y) {
+  pushMatrix();
+  translate(x, y);
+  
+  stroke(cursorc[0]);
+  strokeWeight(15);
+  
+  line(-75, -75, 75, 75);
+  line(-75, 75, 75, -75);
+  
+  popMatrix();
+}
+void pointerr(float x, float y) {
+  pushMatrix();
+  translate(x, y);
+  
+  stroke(cursorc[3]);
+  strokeWeight(15);
+  noFill();
+  
+  ellipse(0, 0, 150, 150);
+  
+  popMatrix();
+}
+
+//-- Timer -- 
+void timer(float x, float y) {
+  pushMatrix();
+  translate(x, y);
+  
+  stroke(0);
+  strokeWeight(20);
+  
+  line(0, -timerlength, 0, timerlength);
+  
+  if (game_mode == playing && cdt == false) {
+    timerlength++;
+  }
+  
+  popMatrix();
 }
 
 //== Game Over ==
