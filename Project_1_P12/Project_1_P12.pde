@@ -1,3 +1,22 @@
+/*
+Alexander Double
+26-09-2021
+Colour-Word Matching Game
+
+P.S.
+
+I only noticed after completing the project that you specifically asked for the game to keep track of the time passed since the game started
+I'm not sure if my timerlength variable counts since it technically does so but just not directly
+
+The "Play Again?" button resets to the game rather than intro mode because I felt playing the animation multiple times would be weird
+
+Also in this project there is an overall timer that counts down rather than a resetting one, but I'm hoping that's fine since either requires a relatively similar amound of effort
+
+FYI you press < or > to play
+
+Lastly, the potential for negative scores was left in because I thought it was funny and to get a negative score you'd have to do worse than random chance
+*/
+
 import processing.javafx.*;
 
 //== Colour Palette ==
@@ -17,7 +36,7 @@ String[] colourwords = {"Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "V
 int colourcw = 0;
 
 //Cursor colours
-color[] cursorc = {c0, c1, c2, c3, c4, c5, c6};
+color[] colourlist = {c0, c1, c2, c3, c4, c5, c6};
 //Current colour
 int cursorcc = 0;
 
@@ -65,11 +84,14 @@ boolean circletog;
 //--Countdown--
 boolean cdt = false;
 int time = 0;
-//Circle behind words
-boolean bcw = false;
+//Circle behind words/the white ring around countdown
+boolean cdring = false;
 //Points
 int pointsl = 0;
 int pointsr = 0;
+int pointst = 0;
+
+int pointsh = -255;
 
 //Timer length
 float timerlength = 0;

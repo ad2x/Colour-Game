@@ -85,7 +85,7 @@ void expcircle(float x, float y) {
     mode = game;
     game_mode = start;
     
-    bcw = false;
+    cdring = false;
     cdt = false;
     circletog = false;
     circledist = 50;

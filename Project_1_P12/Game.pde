@@ -101,7 +101,7 @@ void game_playing() {
   }
   
   //Background Circle
-  if (bcw == true) {
+  if (cdring == true) {
     fill(0);
     noStroke();
     ellipse(width/2, height/2, 300, 300);
@@ -115,6 +115,11 @@ void game_playing() {
   pointsd();
   pointerl(width/5, height/5);
   pointerr(4*width/5, height/5);
+  
+  //End
+  if (timerlength >= height/2) {
+    game_mode = over;
+  }
 }
 
 //Countdown timer
@@ -123,6 +128,8 @@ void countdowntimer(float x, float y) {
   translate(x, y);
   
   fill(0);
+  stroke(255);
+  strokeWeight(7);
   ellipse(0, 0, 300, 300);
   
   fill(255);
@@ -136,7 +143,7 @@ void countdowntimer(float x, float y) {
     
   if (ctime == 0) {
     cdt = false;
-    bcw = true;
+    cdring = true;
     
     reroll();
   }
@@ -187,7 +194,7 @@ void colourword(float x, float y) {
   pushMatrix();
   translate(x, y);
   
-  fill(cursorc[wordcc]);
+  fill(colourlist[wordcc]);
   
   textFont(fontlist[currentfontg]);
   textAlign(CENTER, CENTER);
@@ -213,7 +220,7 @@ void pointerl(float x, float y) {
   pushMatrix();
   translate(x, y);
   
-  stroke(cursorc[0]);
+  stroke(colourlist[0]);
   strokeWeight(15);
   
   line(-75, -75, 75, 75);
@@ -225,7 +232,7 @@ void pointerr(float x, float y) {
   pushMatrix();
   translate(x, y);
   
-  stroke(cursorc[3]);
+  stroke(colourlist[3]);
   strokeWeight(15);
   noFill();
   
@@ -253,5 +260,65 @@ void timer(float x, float y) {
 
 //== Game Over ==
 void game_over() {
+  fscore(width/2, height/4);
   
+  pabutton(width/2, 3*height/5);
+}
+
+//Final score
+void fscore(float x, float y) {
+  pushMatrix();
+  translate(x, y);
+  
+  pointst = pointsl + pointsr;
+  
+  if (pointst > pointsh) {
+    pointsh = pointst;
+  }
+  
+  fill(255);
+  textFont(fontlist[6]);
+  textSize(100);
+  textAlign(CENTER, CENTER);
+  
+  text("Score: " + pointst, 0, 0);
+  if (pointsh == pointst) {
+    fill(colourlist[2]);
+    textSize(30);
+    text("New Highscore!", 0, -100);
+  } else {
+    fill(colourlist[2]);
+    textSize(30);
+    text("Highscore: " + pointsh, 0, -100);
+  }
+  
+  popMatrix();
+}
+
+//-- Play again --
+//This is actually the exact moment at which I realized I could've just made the buttons objects
+void pabutton(float x, float y) {
+  pushMatrix();
+  translate(x, y);
+  
+  fill(0);
+  stroke(255);
+  strokeWeight(15);
+  println(mouseX, mouseY);
+  if (mouseX >= -300 + x && mouseX <= 300 + x && mouseY >= -60 + y && mouseY <= 60 + y) {
+    stroke(180);
+    if (mousePressed) {
+      stroke(110);
+    }
+  } 
+  rect(-300, -60, 600, 120);
+  
+  fill(255);
+  textFont(fontlist[6]);
+  textSize(80);
+  textAlign(CENTER, CENTER);
+  
+  text("Play Again?", 0, 0);
+  
+  popMatrix();
 }
