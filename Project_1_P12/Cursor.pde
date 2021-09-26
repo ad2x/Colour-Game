@@ -28,7 +28,7 @@ void mouseReleased() {
   }
   
   //Play again 
-  if (mouseX >= 100 && mouseX <= 700 && mouseY >= 420 && mouseY <= 540) {
+  if (mouseX >= 100 && mouseX <= 700 && mouseY >= 540 && mouseY <= 660) {
     pointsr = 0;
     pointsl = 0;
     cdt = true;

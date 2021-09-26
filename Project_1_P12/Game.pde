@@ -262,7 +262,9 @@ void timer(float x, float y) {
 void game_over() {
   fscore(width/2, height/4);
   
-  pabutton(width/2, 3*height/5);
+  youlost(width/2, height/2);
+  
+  pabutton(width/2, 3*height/4);
 }
 
 //Final score
@@ -278,7 +280,7 @@ void fscore(float x, float y) {
   
   fill(255);
   textFont(fontlist[6]);
-  textSize(100);
+  textSize(90);
   textAlign(CENTER, CENTER);
   
   text("Score: " + pointst, 0, 0);
@@ -291,6 +293,21 @@ void fscore(float x, float y) {
     textSize(30);
     text("Highscore: " + pointsh, 0, -100);
   }
+  
+  popMatrix();
+}
+
+//You lost
+void youlost(float x, float y) {
+  pushMatrix();
+  translate(x, y);
+  
+  fill(255);
+  textFont(fontlist[6]);
+  textSize(115);
+  textAlign(CENTER, CENTER);
+  
+  text("Game Over", 0, 0);
   
   popMatrix();
 }
