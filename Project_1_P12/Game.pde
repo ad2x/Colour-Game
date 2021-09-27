@@ -252,7 +252,7 @@ void timer(float x, float y) {
   line(0, -timerlength, 0, timerlength);
   
   if (game_mode == playing && cdt == false) {
-    timerlength++;
+    timerlength += 0.5;
   }
   
   popMatrix();
